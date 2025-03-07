@@ -13,11 +13,11 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative h-[70vh] max-h-[600px] min-h-[400px]">
-        <Image src="/placeholder.svg?height=600&width=1200" alt="لحوم طازجة" fill className="object-cover" priority />
+        <img src="/bh.jpg" alt="لحوم طازجة"  className="object-cover h-[70vh] max-h-[600px] min-h-[400px]"  />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 flex flex-col justify-center p-8 md:p-16">
           <span className="text-green-400 font-medium mb-2">مرحباً بكم في متجر الطازج</span>
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 max-w-2xl">
-            أفضل اللحوم الطازجة والمنتجات الغذائية عالية الجودة
+            أفضل اللحوم الطازجة الدواجن عالية الجودة
           </h1>
           <p className="text-white text-lg mb-8 max-w-xl">
             نقدم لكم أجود أنواع اللحوم الطازجة المحلية والمستوردة بأفضل الأسعار والجودة العالية
@@ -88,7 +88,7 @@ export default function Home() {
                 className="flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                  <Image src={category.icon || "/placeholder.svg"} alt={category.name} width={40} height={40} />
+                  <h1 className="font-7xl" style={{fontSize:35}}>{category.icon} </h1>
                 </div>
                 <h3 className="font-medium text-gray-800 text-center">{category.name}</h3>
               </Link>
@@ -111,7 +111,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {featuredProducts.map((product) => (
               <Link href={`/product/${product.id}`} key={product.id} className="group">
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
@@ -203,7 +203,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {bestSellingProducts.map((product) => (
               <Link href={`/product/${product.id}`} key={product.id} className="group">
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
@@ -429,12 +429,10 @@ export default function Home() {
 
 // Sample data
 const categories = [
-  { id: 1, name: "لحوم بقري", slug: "beef", icon: "/placeholder.svg?height=40&width=40" },
-  { id: 2, name: "لحوم غنم", slug: "lamb", icon: "/placeholder.svg?height=40&width=40" },
-  { id: 3, name: "دواجن", slug: "poultry", icon: "/placeholder.svg?height=40&width=40" },
-  { id: 4, name: "أسماك", slug: "fish", icon: "/placeholder.svg?height=40&width=40" },
-  { id: 5, name: "مجمدات", slug: "frozen", icon: "/placeholder.svg?height=40&width=40" },
-  { id: 6, name: "منتجات جاهزة", slug: "ready", icon: "/placeholder.svg?height=40&width=40" },
+  { id: 1, name: "لحوم بقري", slug: "beef", icon: "🐄" },
+  { id: 2, name: "لحوم غنم", slug: "lamb", icon: "🐏" },
+  { id: 3, name: "دواجن", slug: "poultry", icon: "🐓" },
+  { id: 4, name: "قطع دجاج", slug: "fish", icon: "🍗" },
 ]
 
 const featuredProducts = [

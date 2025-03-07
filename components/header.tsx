@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto">
-        <div className="flex items-center justify-between py-4 px-4">
+        <div className="flex items-center justify-around py-4 px-4">
           <Link href="/" className="text-2xl font-bold text-green-800">
             الطازج
           </Link>
@@ -61,7 +61,7 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex   items-center gap-4">
             <button
               onClick={() => setShowSearch(!showSearch)}
               className="text-gray-700 hover:text-green-700"
@@ -94,8 +94,8 @@ export default function Header() {
 
             {/* Mobile Menu */}
             <Sheet>
-              <SheetTrigger asChild>
-                <Button size="icon" className="md:hidden">
+              <SheetTrigger asChild className=' '>
+                <Button variant={'ghost'} size="icon" className="mr-auto md:hidden">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>

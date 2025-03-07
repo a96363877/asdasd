@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">الطازج</h3>
             <p className="text-gray-200 mb-4">
-              نقدم أفضل وأجود أنواع اللحوم الطازجة والمنتجات الغذائية بجودة عالية وأسعار مناسبة.
+              نقدم أفضل وأجود أنواع اللحوم الطازجة والدواجن بجودة عالية وأسعار مناسبة.
             </p>
             <div className="flex items-center space-x-4 space-x-reverse">
               <Link
