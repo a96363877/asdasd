@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Zain', sans-serif;
+* {
+  font-family: 'Zain', sans-serif !important;
 }
 
 @layer utilities {

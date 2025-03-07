@@ -7,13 +7,11 @@ import { ChevronLeft, Minus, Plus, ShoppingCart, Heart, Share2, Star, Truck, Clo
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useToast } from "@/components/ui/use-toast"
 import { useCart } from "@/contexts/cart-context"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const { toast } = useToast()
   const { addItem } = useCart()
   const [quantity, setQuantity] = useState(1)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
@@ -98,7 +96,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         rating: 4,
       },
     ],
-    reviews: [
+    reviews1: [
       {
         id: 1,
         user: "أحمد محمد",
@@ -139,11 +137,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       quantity: quantity,
       image: product.images[0],
     })
-
-    toast({
-      title: "تمت الإضافة إلى السلة",
-      description: `تمت إضافة ${product.name} إلى سلة التسوق الخاصة بك.`,
-    })
+   
   }
 
   const incrementQuantity = () => {
@@ -419,23 +413,23 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     </div>
                   </div>
                   <div className="space-y-4">
-                    {product.reviews.map((review) => (
-                      <div key={review.id} className="border-b pb-4">
+                    {product.reviews1.map((rev) => (
+                      <div key={rev.id} className="border-b pb-4">
                         <div className="flex justify-between mb-2">
-                          <div className="font-bold">{review.user}</div>
+                          <div className="font-bold">{rev.user}</div>
                           <div className="flex">
                             {Array(5)
                               .fill(0)
                               .map((_, i) => (
                                 <Star
                                   key={i}
-                                  className={`h-4 w-4 ${i < review.rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`}
+                                  className={`h-4 w-4 ${i < rev.rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`}
                                 />
                               ))}
                           </div>
                         </div>
-                        <div className="text-sm text-gray-500 mb-2">{review.date}</div>
-                        <p className="text-gray-700">{review.comment}</p>
+                        <div className="text-sm text-gray-500 mb-2">{rev.date}</div>
+                        <p className="text-gray-700">{rev.comment}</p>
                       </div>
                     ))}
                   </div>
