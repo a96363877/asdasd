@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { useCart } from "@/contexts/cart-context"
 
 export default function ProductsPage() {
+  const {addItem}=useCart()
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />
@@ -57,15 +59,14 @@ export default function ProductsPage() {
       {/* Products Grid */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
               <Link href={`/product/${product.id}`} key={product.id} className="group">
                 <div className="bg-white rounded-lg overflow-hidden badgedow-sm group-hover:badgedow-md transition-badgedow">
-                  <div className="relative h-60">
-                    <Image
+                  <div className=" h-50">
+                    <img
                       src={product.img || "/placeholder.svg"}
                       alt={product.name}
-                      fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                       <Badge className="absolute top-3 right-3 bg-red-500 text-white">خصم 12%</Badge>
@@ -93,11 +94,12 @@ export default function ProductsPage() {
                         {product.price && (
                           <span className="text-sm line-through text-gray-500 block">{product.price}</span>
                         )}
-                        <span className="font-bold text-green-700 text-lg">{parseInt(product.price)*.12}</span>
+                        <span className="font-bold text-green-700 text-lg">{(parseInt(product.price)*.12).toFixed(2)+" درهم"}</span>
                       </div>
                       <Button
                         variant="outline"
                         size="sm"
+                        onClick={()=>addItem(product as any)}
                         className="border-green-700 text-green-700 hover:bg-green-700 hover:text-white group-hover:bg-green-700 group-hover:text-white transition-colors"
                       >
                         إضافة للسلة
@@ -121,12 +123,8 @@ export default function ProductsPage() {
               <Button variant="outline" size="sm" className="border-gray-300">
                 2
               </Button>
-              <Button variant="outline" size="sm" className="border-gray-300">
-                3
-              </Button>
-              <Button variant="outline" size="sm" className="border-gray-300">
-                4
-              </Button>
+           
+            
               <Button variant="outline" size="icon" className="border-gray-300">
                 &gt;
               </Button>
@@ -145,8 +143,8 @@ const products = [
   {
     id: 1,
     name: "أفخاذ الدجاج (500 جرام)",
-    price: "30.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "30.00 ",
+    img: "https://altaazej.ae/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-28-at-7.12.39-PM-300x300.jpeg.webp",
     rate: 4,
     feedback: 20,
     badge: null,
@@ -154,8 +152,8 @@ const products = [
   {
     id: 2,
     name: "فيليه الدجاج (500 جرام)",
-    price: "35.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "35.00 ",
+    img: "https://cdn.salla.sa/PbZgg/LbF92kmdzOMf174kf0SZFKf5ZyftBJb3ijRi9U5m.jpg",
     rate: 5,
     feedback: 25,
     badge: "الأكثر مبيعاً",
@@ -163,8 +161,8 @@ const products = [
   {
     id: 3,
     name: "فخذ دجاج كامل (500 جرام)",
-    price: "32.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "32.00 ",
+    img: "https://altaazej.ae/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-28-at-7.12.39-PM-300x300.jpeg.webp",
     rate: 4,
     feedback: 18,
     badge: null,
@@ -172,8 +170,8 @@ const products = [
   {
     id: 4,
     name: "أوراك الدجاج",
-    price: "28.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "28.00 ",
+    img: "https://altaazej.ae/wp-content/uploads/2022/08/Untitled-9-01-copy-600x600.jpg.webp",
     rate: 3,
     feedback: 15,
     badge: null,
@@ -181,8 +179,8 @@ const products = [
   {
     id: 5,
     name: "أجنحة الدجاج (500 جرام)",
-    price: "25.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "25.00 ",
+    img: "https://altaazej.ae/wp-content/uploads/2022/03/Wings-768x768-copy-1-600x600.jpg",
     rate: 4,
     feedback: 30,
     badge: null,
@@ -190,26 +188,18 @@ const products = [
   {
     id: 6,
     name: "كبد الدجاج (500 جرام)",
-    price: "20.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "20.00 ",
+    img: "https://altaazej.ae/wp-content/uploads/2022/08/Chicken-Drum-stick-600x600.jpg.webp",
     rate: 4,
     feedback: 22,
     badge: null,
   },
-  {
-    id: 7,
-    name: "قلوب الدجاج",
-    price: "18.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
-    rate: 3,
-    feedback: 10,
-    badge: null,
-  },
+ 
   {
     id: 8,
     name: "دجاج مخلي من العظم",
-    price: "40.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "40.00 ",
+    img: "/https://cdn.salla.sa/PbZgg/LbF92kmdzOMf174kf0SZFKf5ZyftBJb3ijRi9U5m.jpg",
     rate: 5,
     feedback: 35,
     badge: "جديد",
@@ -217,8 +207,8 @@ const products = [
   {
     id: 9,
     name: "القوانص الدجاج",
-    price: "22.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "22.00 ",
+    img: "https://img.ananinja.com/media/ninja-catalog-42/a54510c5-d209-44e7-a115-df88213d5f48_6287007090270-FreshChickenGizzards350gm.png",
     rate: 3,
     feedback: 12,
     badge: null,
@@ -226,8 +216,8 @@ const products = [
   {
     id: 10,
     name: "دجاج لولي بوب",
-    price: "38.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "38.00 ",
+    img: "https://altaazej.ae/wp-content/uploads/2022/08/lollipop-300x300.jpg.webp",
     rate: 5,
     feedback: 28,
     badge: "الأكثر مبيعاً",
@@ -235,8 +225,8 @@ const products = [
   {
     id: 11,
     name: "حزم العائلة",
-    price: "100.00 درهم",
-    img: "/placeholder.svg?height=240&width=240",
+    price: "100.00 ",
+    img: "https://altaazej.ae/wp-content/uploads/2022/04/Family-Package-600x600.jpg.webp",
     rate: 5,
     feedback: 50,
     badge: "عرض خاص",

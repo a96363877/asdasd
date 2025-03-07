@@ -1,3 +1,5 @@
+
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, Star, Clock, Truck, CreditCard, ShieldCheck, Award } from "lucide-react"
@@ -5,8 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { useCart } from "@/contexts/cart-context"
 
 export default function Home() {
+  const {addItem}=useCart()
+
   return (
     <main className="min-h-screen bg-white">
       <Header />
@@ -115,12 +120,11 @@ export default function Home() {
             {featuredProducts.map((product) => (
               <Link href={`/product/${product.id}`} key={product.id} className="group">
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
-                  <div className="relative h-60">
-                    <Image
+                  <div className="relative ">
+                    <img
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                     {product.discount && (
                       <Badge className="absolute top-3 right-3 bg-red-500 text-white">خصم {product.discount}%</Badge>
@@ -170,10 +174,9 @@ export default function Home() {
       {/* Banner Section */}
       <section className="py-20 relative">
         <div className="absolute inset-0 bg-black/60 z-0"></div>
-        <Image
-          src="/placeholder.svg?height=400&width=1200"
+        <img
+          src="/lhm.webp"
           alt="عروض خاصة"
-          fill
           className="object-cover absolute inset-0 z-[-1]"
         />
         <div className="container mx-auto px-4 relative z-10">
@@ -207,11 +210,10 @@ export default function Home() {
             {bestSellingProducts.map((product) => (
               <Link href={`/product/${product.id}`} key={product.id} className="group">
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
-                  <div className="relative h-60">
-                    <Image
+                  <div className=" h-50">
+                    <img
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
-                      fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {product.badge && (
@@ -237,7 +239,8 @@ export default function Home() {
                       <span className="font-bold text-green-700 text-lg">{product.price}</span>
                       <Button
                         variant="outline"
-                        size="sm"
+                        size="sm"                        onClick={()=>addItem(product as any)}
+
                         className="border-green-700 text-green-700 hover:bg-green-700 hover:text-white group-hover:bg-green-700 group-hover:text-white transition-colors"
                       >
                         إضافة للسلة
@@ -441,7 +444,7 @@ const featuredProducts = [
     name: "لحم بقري طازج",
     price: "75.00 درهم",
     oldPrice: "85.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
+    image: "/lhm.webp",
     rating: 4,
     reviews: 24,
     discount: 12,
@@ -452,7 +455,7 @@ const featuredProducts = [
     name: "دجاج كامل",
     price: "45.00 درهم",
     oldPrice: "55.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
+    image: "https://altaazej.ae/wp-content/uploads/2022/03/Full-Chicken-Al-Taazej-1-600x600.jpg.webp",
     rating: 5,
     reviews: 36,
     discount: 18,
@@ -463,7 +466,7 @@ const featuredProducts = [
     name: "لحم غنم",
     price: "95.00 درهم",
     oldPrice: "110.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
+    image: "/lhm2.webp",
     rating: 4,
     reviews: 18,
     discount: 14,
@@ -474,7 +477,7 @@ const featuredProducts = [
     name: "شرائح لحم",
     price: "65.00 درهم",
     oldPrice: "75.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
+    image: "https://cdn.salla.sa/aodXX/c82ccff8-5f5a-4683-83d0-242ac8bc3733-1000x1000-cpWERJpzCLwM63htjW37CVAUiH1BqukKKGwnUi1F.jpg",
     rating: 3,
     reviews: 12,
     discount: 13,
@@ -487,7 +490,7 @@ const bestSellingProducts = [
     id: 5,
     name: "كباب لحم",
     price: "60.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
+    image: "https://cdn.salla.sa/aodXX/cPiR2bHO2Fif6mT4mDspNhweHiKRooGa7FlaguKI.jpg",
     rating: 5,
     reviews: 42,
     badge: "الأكثر مبيعاً",
@@ -496,7 +499,7 @@ const bestSellingProducts = [
     id: 6,
     name: "دجاج مشوي",
     price: "50.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
+    image: "https://cdn.salla.sa/aodXX/3Uyqd1C6onKT4Gd5mxWYMFVx8dTABIOJnA8afDqg.jpg",
     rating: 4,
     reviews: 28,
     badge: "جديد",
@@ -505,20 +508,12 @@ const bestSellingProducts = [
     id: 7,
     name: "لحم مفروم",
     price: "40.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
+    image: "https://cdn.salla.sa/aodXX/9jSHmcFks9LIIcCmiyHVPQNRcUhAtFC5SugIqIpJ.jpg",
     rating: 4,
     reviews: 36,
     badge: null,
   },
-  {
-    id: 8,
-    name: "سمك طازج",
-    price: "70.00 درهم",
-    image: "/placeholder.svg?height=240&width=240",
-    rating: 3,
-    reviews: 15,
-    badge: null,
-  },
+ 
 ]
 
 const testimonials = [

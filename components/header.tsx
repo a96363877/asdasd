@@ -36,7 +36,7 @@ export default function Header() {
               المنتجات
             </Link>
             <Link
-              href="/categories"
+              href="/slllproducts"
               className="text-gray-700 hover:text-green-700 font-medium"
             >
               التصنيفات
@@ -108,7 +108,7 @@ export default function Header() {
                     الرئيسية
                   </Link>
                   <Link
-                    href="/products"
+                    href="/slllproducts"
                     className="text-gray-800 hover:text-green-700 font-medium"
                   >
                     المنتجات
