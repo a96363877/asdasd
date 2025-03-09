@@ -147,6 +147,7 @@ const products = [
     img: "https://altaazej.ae/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-28-at-7.12.39-PM-300x300.jpeg.webp",
     rate: 4,
     feedback: 20,
+    quantity:0,
     badge: null,
   },
   {
@@ -156,6 +157,7 @@ const products = [
     img: "https://cdn.salla.sa/PbZgg/LbF92kmdzOMf174kf0SZFKf5ZyftBJb3ijRi9U5m.jpg",
     rate: 5,
     feedback: 25,
+    quantity:0,
     badge: "الأكثر مبيعاً",
   },
   {
@@ -164,6 +166,7 @@ const products = [
     price: "32.00 ",
     img: "https://altaazej.ae/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-28-at-7.12.39-PM-300x300.jpeg.webp",
     rate: 4,
+    quantity:0,
     feedback: 18,
     badge: null,
   },
@@ -173,6 +176,7 @@ const products = [
     price: "28.00 ",
     img: "https://altaazej.ae/wp-content/uploads/2022/08/Untitled-9-01-copy-600x600.jpg.webp",
     rate: 3,
+    quantity:0,
     feedback: 15,
     badge: null,
   },
@@ -182,6 +186,7 @@ const products = [
     price: "25.00 ",
     img: "https://altaazej.ae/wp-content/uploads/2022/03/Wings-768x768-copy-1-600x600.jpg",
     rate: 4,
+    quantity:0,
     feedback: 30,
     badge: null,
   },
@@ -192,6 +197,7 @@ const products = [
     img: "https://altaazej.ae/wp-content/uploads/2022/08/Chicken-Drum-stick-600x600.jpg.webp",
     rate: 4,
     feedback: 22,
+    quantity:0,
     badge: null,
   },
  
@@ -202,6 +208,7 @@ const products = [
     img: "/https://cdn.salla.sa/PbZgg/LbF92kmdzOMf174kf0SZFKf5ZyftBJb3ijRi9U5m.jpg",
     rate: 5,
     feedback: 35,
+    quantity:0,
     badge: "جديد",
   },
   {
@@ -211,6 +218,7 @@ const products = [
     img: "https://img.ananinja.com/media/ninja-catalog-42/a54510c5-d209-44e7-a115-df88213d5f48_6287007090270-FreshChickenGizzards350gm.png",
     rate: 3,
     feedback: 12,
+    quantity:0,
     badge: null,
   },
   {
@@ -221,6 +229,8 @@ const products = [
     rate: 5,
     feedback: 28,
     badge: "الأكثر مبيعاً",
+    quantity:0,
+
   },
   {
     id: 11,
@@ -229,6 +239,7 @@ const products = [
     img: "https://altaazej.ae/wp-content/uploads/2022/04/Family-Package-600x600.jpg.webp",
     rate: 5,
     feedback: 50,
+    quantity:0,
     badge: "عرض خاص",
   }
 ];

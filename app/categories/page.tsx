@@ -1,13 +1,10 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronLeft } from "lucide-react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 
 export default function CategoriesPage() {
   return (
     <main className="min-h-screen bg-gray-50">
-      <Header />
 
       {/* Hero Section */}
       <section className="relative h-[300px]">
@@ -90,7 +87,6 @@ export default function CategoriesPage() {
         </div>
       </section>
 
-      <Footer />
     </main>
   )
 }

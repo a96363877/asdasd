@@ -5,16 +5,12 @@ import Link from "next/link"
 import { ChevronLeft, Star, Clock, Truck, CreditCard, ShieldCheck, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import { useCart } from "@/contexts/cart-context"
+import { AddToCartButton } from "@/components/add-to-cart"
 
 export default function Home() {
-  const {addItem}=useCart()
 
   return (
     <main className="min-h-screen bg-white">
-      <Header />
 
       {/* Hero Section */}
       <section className="relative h-[70vh] max-h-[600px] min-h-[400px]">
@@ -31,7 +27,7 @@ export default function Home() {
             <Button className="bg-green-700 hover:bg-green-800 text-lg px-8 py-6">تسوق الآن</Button>
             <Button
               variant="outline"
-              className="bg-white/10 hover:bg-white/20 border-white text-white text-lg px-8 py-6"
+              className="bg-white/10 hover:bg-white border-white text-white text-lg px-8 py-6"
             >
               تعرف علينا
             </Button>
@@ -88,7 +84,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {categories.map((category) => (
               <Link
-                href={`/category/${category.slug}`}
+                href={`#`}
                 key={category.id}
                 className="flex flex-col items-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
               >
@@ -117,7 +113,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
+            {featuredProducts.map((product:any) => (
               <Link href={`/product/${product.id}`} key={product.id} className="group">
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
                   <div className="relative ">
@@ -155,13 +151,7 @@ export default function Home() {
                         )}
                         <span className="font-bold text-green-700 text-lg">{product.price}</span>
                       </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-green-700 text-green-700 hover:bg-green-700 hover:text-white group-hover:bg-green-700 group-hover:text-white transition-colors"
-                      >
-                        إضافة للسلة
-                      </Button>
+                      <AddToCartButton product={product} />
                     </div>
                   </div>
                 </div>
@@ -208,7 +198,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {bestSellingProducts.map((product) => (
-              <Link href={`/product/${product.id}`} key={product.id} className="group">
+            
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
                   <div className=" h-50">
                     <img
@@ -227,7 +217,7 @@ export default function Home() {
                         .map((_, i) => (
                           <Star
                             key={i}
-                            className={`h-4 w-4 ${i < product.rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`}
+                            className={`h-4 w-4 ${i < product?.rating! ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`}
                           />
                         ))}
                       <span className="text-xs text-gray-500 mr-1">({product.reviews})</span>
@@ -236,19 +226,12 @@ export default function Home() {
                       {product.name}
                     </h3>
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-green-700 text-lg">{product.price}</span>
-                      <Button
-                        variant="outline"
-                        size="sm"                        onClick={()=>addItem(product as any)}
+                      <span className="font-bold text-green-700 text-lg">{product.formattedPrice}</span>
+                                          <AddToCartButton product={product} />
 
-                        className="border-green-700 text-green-700 hover:bg-green-700 hover:text-white group-hover:bg-green-700 group-hover:text-white transition-colors"
-                      >
-                        إضافة للسلة
-                      </Button>
                     </div>
                   </div>
                 </div>
-              </Link>
             ))}
           </div>
         </div>
@@ -424,8 +407,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   )
 }
@@ -438,34 +419,38 @@ const categories = [
   { id: 4, name: "قطع دجاج", slug: "fish", icon: "🍗" },
 ]
 
-const featuredProducts = [
+const featuredProducts:any = [
   {
     id: 1,
     name: "لحم بقري طازج",
-    price: "75.00 درهم",
-    oldPrice: "85.00 درهم",
+    formattedPrice: "75.00 ",
+    oldPrice: "85.00 ",
     image: "/lhm.webp",
     rating: 4,
     reviews: 24,
     discount: 12,
     badge: null,
+    quantity:0,
+
   },
   {
     id: 2,
     name: "دجاج كامل",
-    price: "45.00 درهم",
-    oldPrice: "55.00 درهم",
+    price: "45.00 ",
+    oldPrice: "55.00 ",
     image: "https://altaazej.ae/wp-content/uploads/2022/03/Full-Chicken-Al-Taazej-1-600x600.jpg.webp",
     rating: 5,
     reviews: 36,
     discount: 18,
     badge: null,
+    quantity:0,
+
   },
   {
     id: 3,
     name: "لحم غنم",
-    price: "95.00 درهم",
-    oldPrice: "110.00 درهم",
+    price: "95.00 ",
+    oldPrice: "110.00 ",
     image: "/lhm2.webp",
     rating: 4,
     reviews: 18,
@@ -475,8 +460,8 @@ const featuredProducts = [
   {
     id: 4,
     name: "شرائح لحم",
-    price: "65.00 درهم",
-    oldPrice: "75.00 درهم",
+    price: "65.00 ",
+    oldPrice: "75.00 ",
     image: "https://cdn.salla.sa/aodXX/c82ccff8-5f5a-4683-83d0-242ac8bc3733-1000x1000-cpWERJpzCLwM63htjW37CVAUiH1BqukKKGwnUi1F.jpg",
     rating: 3,
     reviews: 12,
@@ -489,25 +474,29 @@ const bestSellingProducts = [
   {
     id: 5,
     name: "كباب لحم",
-    price: "60.00 درهم",
+    formattedPrice: "60.00 ",
+    oldPrice: "75.00 ",
     image: "https://cdn.salla.sa/aodXX/cPiR2bHO2Fif6mT4mDspNhweHiKRooGa7FlaguKI.jpg",
-    rating: 5,
-    reviews: 42,
+        reviews: 12,
+    discount: 13,
     badge: "الأكثر مبيعاً",
   },
   {
     id: 6,
     name: "دجاج مشوي",
-    price: "50.00 درهم",
+    formattedPrice: "50.00 ",
+    oldPrice: "60.00 ",
     image: "https://cdn.salla.sa/aodXX/3Uyqd1C6onKT4Gd5mxWYMFVx8dTABIOJnA8afDqg.jpg",
     rating: 4,
     reviews: 28,
+    discount:13,
     badge: "جديد",
+
   },
   {
     id: 7,
     name: "لحم مفروم",
-    price: "40.00 درهم",
+    priformattedPricece: "40.00 ",
     image: "https://cdn.salla.sa/aodXX/9jSHmcFks9LIIcCmiyHVPQNRcUhAtFC5SugIqIpJ.jpg",
     rating: 4,
     reviews: 36,

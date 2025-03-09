@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { CartProvider } from "@/contexts/cart-context"
 import './globals.css'
+import Header from "@/components/header"
+import Footer from "@/components/footer"
 
 export const metadata: Metadata = {
   title: "الطازج - أفضل اللحوم الطازجة",
@@ -17,7 +19,14 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body >
-        <CartProvider>{children}</CartProvider>
+        
+        <CartProvider>
+        <main className="min-h-screen bg-gray-50">
+      <Header />
+      {children}
+      <Footer />
+      </main>
+      </CartProvider>
       </body>
     </html>
   )

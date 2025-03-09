@@ -8,10 +8,7 @@ import Footer from "@/components/footer"
 
 export default function OffersPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
-      <Header />
-
-      {/* Hero Section */}
+    <>
       <section className="relative h-[300px]">
         <Image
           src="/placeholder.svg?height=300&width=1200"
@@ -158,9 +155,7 @@ export default function OffersPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
-    </main>
+    </>
   )
 }
 

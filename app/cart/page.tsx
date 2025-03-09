@@ -10,24 +10,24 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, formattedSubtotal, subtotal } = useCart();
+  const { items, removeItem, updateQuantity, totalPrice } = useCart();
   const [couponCode, setCouponCode] = useState("");
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
 
   // Shipping cost calculation
-  const shippingCost = subtotal >= 100 ? 0 : 10;
+  const shippingCost = totalPrice! >= 100 ? 0 : 10;
   const formattedShippingCost = `${shippingCost.toFixed(2)} درهم`;
   
   // Total calculation
-  const total = subtotal + shippingCost;
+  const total = (totalPrice!) + shippingCost;
   const formattedTotal = `${total.toFixed(2)} درهم`;
 
-  const handleRemoveItem = (id: string | number) => {
+  const handleRemoveItem = (id: number) => {
     removeItem(id);
   
   };
 
-  const handleQuantityChange = (id: string | number, newQuantity: number) => {
+  const handleQuantityChange = (id: number, newQuantity: number) => {
     updateQuantity(id, newQuantity);
   };
 
@@ -50,7 +50,7 @@ export default function CartPage() {
       <div className="container mx-auto px-4 py-8 md:py-12">
         <h1 className="text-2xl md:text-3xl font-bold mb-6">سلة التسوق</h1>
 
-        {items.length === 0 ? (
+        {items?.length === 0 ? (
           <div className="bg-white rounded-lg shadow-sm p-8 text-center">
             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <ShoppingBag className="h-10 w-10 text-gray-400" />
@@ -67,26 +67,25 @@ export default function CartPage() {
             <div className="md:col-span-2">
               <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                 <div className="p-4 border-b">
-                  <h2 className="font-bold text-lg">المنتجات ({items.length})</h2>
+                  <h2 className="font-bold text-lg">المنتجات ({items?.length})</h2>
                 </div>
 
                 <div className="divide-y">
-                  {items.map((item) => (
-                    <div key={item.id} className="p-4 md:p-6 flex flex-col md:flex-row md:items-center">
+                  {items?.map((item) => (
+                    <div key={item?.id} className="p-4 md:p-6 flex flex-col md:flex-row md:items-center">
                       <div className="flex items-center flex-1 mb-4 md:mb-0">
                         <div className="relative w-20 h-20 rounded-md overflow-hidden flex-shrink-0">
-                          <Image 
-                            src={item.image || "/placeholder.svg"} 
-                            alt={item.name}
-                            fill
+                          <img 
+                            src={item?.image || "/placeholder.svg"} 
+                            alt={item?.name}
                             className="object-cover"
                           />
                         </div>
                         <div className="mr-4 flex-1">
-                          <Link href={`/product/${item.id}`} className="font-bold text-gray-800 hover:text-green-700">
-                            {item.name}
-                          </Link>
-                          <div className="text-green-700 font-medium mt-1">{item.formattedPrice}</div>
+                          <Button  className="font-bold text-gray-800 hover:text-green-700">
+                            {item?.name}
+                          </Button>
+                          <div className="text-green-700 font-medium mt-1">{item?.formattedPrice}</div>
                         </div>
                       </div>
 
@@ -94,15 +93,15 @@ export default function CartPage() {
                         <div className="flex items-center border rounded-md">
                           <button 
                             className="px-3 py-1 border-l text-gray-500 hover:text-gray-700 disabled:opacity-50"
-                            onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                            disabled={item.quantity <= 1}
+                            onClick={() => handleQuantityChange(item?.id, item?.quantity - 1)}
+                            disabled={item?.quantity <= 1}
                           >
                             <Minus className="h-4 w-4" />
                           </button>
-                          <span className="px-4 py-1 font-medium">{item.quantity}</span>
+                          <span className="px-4 py-1 font-medium">{item?.quantity}</span>
                           <button 
                             className="px-3 py-1 border-r text-gray-500 hover:text-gray-700"
-                            onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                            onClick={() => handleQuantityChange(item?.id, item?.quantity + 1)}
                           >
                             <Plus className="h-4 w-4" />
                           </button>
@@ -110,7 +109,7 @@ export default function CartPage() {
                         
                         <button 
                           className="text-red-500 hover:text-red-700 p-2"
-                          onClick={() => handleRemoveItem(item.id)}
+                          onClick={() => handleRemoveItem(item?.id)}
                         >
                           <Trash2 className="h-5 w-5" />
                         </button>
@@ -133,7 +132,7 @@ export default function CartPage() {
                     variant="ghost" 
                     className="text-red-500 hover:text-red-700 hover:bg-red-50"
                     onClick={() => {
-                      items.forEach(item => removeItem(item.id));
+                      items?.forEach(item => removeItem(item?.id));
                     }}
                   >
                     تفريغ السلة
@@ -171,7 +170,7 @@ export default function CartPage() {
                 <div className="space-y-3 border-b pb-4">
                   <div className="flex justify-between">
                     <span className="text-gray-600">المجموع الفرعي:</span>
-                    <span className="font-medium">{formattedSubtotal}</span>
+                    <span className="font-medium">{totalPrice}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">رسوم التوصيل:</span>
@@ -185,7 +184,7 @@ export default function CartPage() {
                   </div>
                   {shippingCost > 0 && (
                     <div className="text-sm text-green-700">
-                      أضف {(100 - subtotal).toFixed(2)} درهم للحصول على توصيل مجاني
+                      أضف {(100 - totalPrice!).toFixed(2)} درهم للحصول على توصيل مجاني
                     </div>
                   )}
                 </div>

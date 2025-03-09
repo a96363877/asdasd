@@ -3,13 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-gray-50">
-      <Header />
 
       {/* Hero Section */}
       <section className="bg-green-700 text-white py-16">
@@ -161,7 +158,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <Footer />
     </main>
   )
 }
