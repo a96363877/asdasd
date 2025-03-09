@@ -13,7 +13,7 @@ export default function Header() {
 
   const menuItems = [
     { name: "الرئيسية", href: "/" },
-    { name: "المنتجات", href: "/products" },
+    { name: "المنتجات", href: "/slllproducts" },
     { name: "العروض", href: "/offers" },
     { name: "من نحن", href: "/about" },
     { name: "اتصل بنا", href: "/contact" },

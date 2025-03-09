@@ -5,6 +5,7 @@ import { ShoppingCart, Trash2, Plus, Minus } from "lucide-react"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Badge } from "@/components/ui/badge"
 import { useCart } from "@/contexts/cart-context"
+import Link from "next/link"
 
 export function CartDrawer() {
   const { items, totalItems, totalPrice, removeItem, updateQuantity, clearCart } = useCart()
@@ -101,9 +102,10 @@ export function CartDrawer() {
               </div>
               <div className="flex justify-between font-medium text-lg mt-2">
                 <span>المجموع</span>
-                <span>{totalPrice.toFixed(2)}</span>
+                <span>{totalPrice!.toFixed(2)}</span>
               </div>
-              <Button className="w-full mt-4 bg-green-700 hover:bg-green-800">إتمام الشراء</Button>
+              <Link href={'/cart'} ><Button className="w-full mt-4 bg-green-700 hover:bg-green-800">
+              إتمام الشراء</Button></Link>
             </div>
           </div>
         )}

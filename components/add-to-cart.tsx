@@ -12,12 +12,12 @@ interface AddToCartButtonProps {
   size?: "default" | "sm" | "lg"
 }
 
-export function AddToCartButton({ product, variant = "default", size = "default" }: AddToCartButtonProps) {
+export function AddToCartButton({ product, variant = "outline", size = "default" }: AddToCartButtonProps) {
   const { isInCart, quantity, addToCart, incrementQuantity, decrementQuantity } = useCartItem(product.id)
 
   if (!isInCart) {
     return (
-      <Button variant={variant} size={size} onClick={() => addToCart(product)} className="w-full">
+      <Button variant={variant} size={size} onClick={() => addToCart(product)} >
         <ShoppingCart className="mr-2 h-4 w-4" />
         إضافة إلى السلة
       </Button>

@@ -8,27 +8,6 @@ import { Label } from "@/components/ui/label"
 
 export default function ConfirmPage() {
   // Sample cart items
-  const cartItems = [
-    {
-      id: 1,
-      name: "لحم بقري طازج",
-      price: "75.00 درهم",
-      quantity: 2,
-      image: "/placeholder.svg?height=80&width=80",
-    },
-    {
-      id: 2,
-      name: "دجاج كامل",
-      price: "45.00 درهم",
-      quantity: 1,
-      image: "/placeholder.svg?height=80&width=80",
-    },
-  ]
-
-  // Calculate totals
-  const subtotal = "195.00 درهم"
-  const shipping = "10.00 درهم"
-  const total = "205.00 درهم"
 
   return (
     <main className="min-h-screen bg-gray-50" dir="rtl">
@@ -114,41 +93,7 @@ export default function ConfirmPage() {
             </Button>
           </div>
 
-          {/* Order Summary */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-bold mb-4">ملخص الطلب</h2>
-            <div className="space-y-4 mb-6">
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex gap-3">
-                  <div className="relative w-16 h-16 rounded-md overflow-hidden">
-                    <Image src={item.image || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-medium">{item.name}</h4>
-                    <div className="flex justify-between text-sm text-gray-600">
-                      <span>الكمية: {item.quantity}</span>
-                      <span>{item.price}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t pt-4 space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">المجموع الفرعي:</span>
-                <span>{subtotal}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">رسوم التوصيل:</span>
-                <span>{shipping}</span>
-              </div>
-              <div className="flex justify-between font-bold text-lg pt-2 border-t">
-                <span>الإجمالي:</span>
-                <span className="text-green-700">{total}</span>
-              </div>
-            </div>
-          </div>
+        
         </div>
       </div>
     </main>

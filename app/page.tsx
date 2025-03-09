@@ -6,6 +6,7 @@ import { ChevronLeft, Star, Clock, Truck, CreditCard, ShieldCheck, Award } from 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { AddToCartButton } from "@/components/add-to-cart"
+import { Card } from "@/components/ui/card"
 
 export default function Home() {
 
@@ -114,7 +115,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {featuredProducts.map((product:any) => (
-              <Link href={`/product/${product.id}`} key={product.id} className="group">
+              <Card key={product.id} className="group">
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
                   <div className="relative ">
                     <img
@@ -149,13 +150,13 @@ export default function Home() {
                         {product.oldPrice && (
                           <span className="text-sm line-through text-gray-500 block">{product.oldPrice}</span>
                         )}
-                        <span className="font-bold text-green-700 text-lg">{product.price}</span>
+                        <span className="font-bold text-green-700 text-lg">{product.formattedPrice} درهم </span>
                       </div>
                       <AddToCartButton product={product} />
                     </div>
                   </div>
                 </div>
-              </Link>
+              </Card>
             ))}
           </div>
         </div>
@@ -226,7 +227,7 @@ export default function Home() {
                       {product.name}
                     </h3>
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-green-700 text-lg">{product.formattedPrice}</span>
+                      <span className="font-bold text-green-700 text-lg">{product.formattedPrice} درهم </span>
                                           <AddToCartButton product={product} />
 
                     </div>
@@ -436,7 +437,7 @@ const featuredProducts:any = [
   {
     id: 2,
     name: "دجاج كامل",
-    price: "45.00 ",
+    formattedPrice: "45.00 ",
     oldPrice: "55.00 ",
     image: "https://altaazej.ae/wp-content/uploads/2022/03/Full-Chicken-Al-Taazej-1-600x600.jpg.webp",
     rating: 5,
@@ -449,7 +450,7 @@ const featuredProducts:any = [
   {
     id: 3,
     name: "لحم غنم",
-    price: "95.00 ",
+    formattedPrice: "95.00 ",
     oldPrice: "110.00 ",
     image: "/lhm2.webp",
     rating: 4,
@@ -460,7 +461,7 @@ const featuredProducts:any = [
   {
     id: 4,
     name: "شرائح لحم",
-    price: "65.00 ",
+    formattedPrice: "65.00 ",
     oldPrice: "75.00 ",
     image: "https://cdn.salla.sa/aodXX/c82ccff8-5f5a-4683-83d0-242ac8bc3733-1000x1000-cpWERJpzCLwM63htjW37CVAUiH1BqukKKGwnUi1F.jpg",
     rating: 3,
@@ -496,7 +497,7 @@ const bestSellingProducts = [
   {
     id: 7,
     name: "لحم مفروم",
-    priformattedPricece: "40.00 ",
+    formattedPrice: "40.00 ",
     image: "https://cdn.salla.sa/aodXX/9jSHmcFks9LIIcCmiyHVPQNRcUhAtFC5SugIqIpJ.jpg",
     rating: 4,
     reviews: 36,

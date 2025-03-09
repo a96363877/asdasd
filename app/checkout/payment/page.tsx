@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import { ShoppingCart, CreditCard, Wallet } from "lucide-react"
@@ -6,26 +7,10 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { useCart } from "@/contexts/cart-context"
 
 export default function PaymentPage() {
-  // Sample cart items
-  const cartItems = [
-    {
-      id: 1,
-      name: "لحم بقري طازج",
-      price: "75.00 درهم",
-      quantity: 2,
-      image: "/placeholder.svg?height=80&width=80",
-    },
-    {
-      id: 2,
-      name: "دجاج كامل",
-      price: "45.00 درهم",
-      quantity: 1,
-      image: "/placeholder.svg?height=80&width=80",
-    },
-  ]
-
+  const { items, removeItem, updateQuantity, totalPrice } = useCart();
   // Calculate totals
   const subtotal = "195.00 درهم"
   const shipping = "10.00 درهم"
@@ -93,49 +78,45 @@ export default function PaymentPage() {
                   </Label>
                 </div>
 
-                <div className="mr-8 border rounded-lg p-6 mb-4">
+                <div className="mr-8 border rounded-lg p-6 mb-4 w-full">
                   <div className="grid grid-cols-1 gap-4 mb-4">
+                    <div className="grid grid-cols-2  gap-4 mb-4">
+                      <img src="/visa.svg" alt="paymentM" className="mt-4" />
+                      <img src="/next.svg" alt="paymentM" width={80} />
+                    </div>
+                    <div>
+                      <Label htmlFor="cardName text-sm">الاسم على البطاقة</Label>
+                      <Input id="cardName" placeholder="الاسم كما يظهر على البطاقة" className="mt-1 text-sm h-6" />
+                    </div>
                     <div>
                       <Label htmlFor="cardNumber">رقم البطاقة</Label>
-                      <Input id="cardNumber" placeholder="0000 0000 0000 0000" className="mt-1" />
+                      <Input id="cardNumber" placeholder="0000 0000 0000 0000" className="mt-1 text-sm h-6" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="expiryDate">تاريخ الانتهاء</Label>
-                        <Input id="expiryDate" placeholder="MM/YY" className="mt-1" />
+                        <Input id="expiryDate" placeholder="MM/YY" className="mt-1 h-6" />
                       </div>
                       <div>
                         <Label htmlFor="cvv">رمز الأمان (CVV)</Label>
-                        <Input id="cvv" placeholder="123" className="mt-1" />
+                        <Input id="cvv" placeholder="123" className="mt-1 h-6" />
                       </div>
                     </div>
-                    <div>
-                      <Label htmlFor="cardName">الاسم على البطاقة</Label>
-                      <Input id="cardName" placeholder="الاسم كما يظهر على البطاقة" className="mt-1" />
-                    </div>
+                   
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2 space-x-reverse border rounded-lg p-4 mb-2">
-                  <RadioGroupItem value="cod" id="cod" />
+                <div  className="flex items-center space-x-2 space-x-reverse border rounded-lg p-4 mb-2">
+                  <RadioGroupItem value="cod" id="cod" disabled />
                   <Wallet className="h-5 w-5 text-gray-600 ml-2" />
                   <Label htmlFor="cod" className="font-medium">
                     الدفع عند الاستلام
                   </Label>
+                  <span className="text-sm text-red-600 text-center">غير متاح حالياً</span>
                 </div>
               </RadioGroup>
 
-              <div className="flex justify-between">
-                <Button
-                  variant="outline"
-                  className="border-green-700 text-green-700 hover:bg-green-700 hover:text-white"
-                >
-                  <Link href="/checkout/shipping">العودة للشحن</Link>
-                </Button>
-                <Button className="bg-green-700 hover:bg-green-800">
-                  <Link href="/checkout/confirm">تأكيد الطلب</Link>
-                </Button>
-              </div>
+            
             </div>
           </div>
 
@@ -144,16 +125,16 @@ export default function PaymentPage() {
             <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
               <h2 className="text-xl font-bold mb-4">ملخص الطلب</h2>
               <div className="space-y-4 mb-6">
-                {cartItems.map((item) => (
+                {items.map((item) => (
                   <div key={item.id} className="flex gap-3">
                     <div className="relative w-16 h-16 rounded-md overflow-hidden">
-                      <Image src={item.image || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
+                      <img src={item.image || "/placeholder.svg"}  alt="c" className="object-cover" />
                     </div>
                     <div className="flex-1">
                       <h4 className="font-medium">{item.name}</h4>
                       <div className="flex justify-between text-sm text-gray-600">
                         <span>الكمية: {item.quantity}</span>
-                        <span>{item.price}</span>
+                        <span>{item.formattedPrice} درهم</span>
                       </div>
                     </div>
                   </div>
@@ -174,8 +155,21 @@ export default function PaymentPage() {
                   <span className="text-green-700">{total}</span>
                 </div>
               </div>
+              
             </div>
+            
           </div>
+          <div className="flex justify-around p-4 bg-white rounded">
+                <Button
+                  variant="outline"
+                  className="border-green-700 text-green-700 hover:bg-green-700 hover:text-white"
+                >
+                  <Link href="/checkout/shipping">العودة للشحن</Link>
+                </Button>
+                <Button className="bg-green-700 hover:bg-green-800">
+                  <Link href="/checkout/confirm">تأكيد الطلب</Link>
+                </Button>
+              </div>
         </div>
       </div>
     </main>

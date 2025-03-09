@@ -45,7 +45,6 @@ export default function CartPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <Header />
 
       <div className="container mx-auto px-4 py-8 md:py-12">
         <h1 className="text-2xl md:text-3xl font-bold mb-6">سلة التسوق</h1>
@@ -82,10 +81,10 @@ export default function CartPage() {
                           />
                         </div>
                         <div className="mr-4 flex-1">
-                          <Button  className="font-bold text-gray-800 hover:text-green-700">
+                          <div  className="font-bold text-gray-800 hover:text-green-700">
                             {item?.name}
-                          </Button>
-                          <div className="text-green-700 font-medium mt-1">{item?.formattedPrice}</div>
+                          </div>
+                          <div className="text-green-700 font-medium mt-1">{item?.formattedPrice}درهم</div>
                         </div>
                       </div>
 
